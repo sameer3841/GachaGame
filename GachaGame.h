@@ -39,6 +39,13 @@ public:
         return nullptr; // Should not happen, should always return an item by index
     }
 
+    vector<shared_ptr<GachaItem>> getItems() { return items; }
+
+    void increaseRate(size_t index, double increaseBy) {
+        rates[index] += increaseBy;
+        totalRate += increaseBy;
+    }
+
 private:
     vector<shared_ptr<GachaItem>> items;
     vector<double> rates;
@@ -116,6 +123,7 @@ public:
 private:
     GachaPool pool;
     Player player{"Player"};
+    int pityCounter = 0;  // Counter for unsuccessful pulls
 
     void setupPool() {
         // Common Weapons
@@ -195,8 +203,24 @@ private:
             auto item = pool.pull();
             player.addItem(item);
             player.spendCurrency(cost);
-        } else {
-            cout << "You cannot afford anymore. ☹️" << endl;
+
+            if (item->getRarity() >= 4) pityCounter = 0;
+            else pityCounter++;
+
+            if (pityCounter >= 5) {
+                increaseHighRarityOdds();
+                pityCounter = 0;
+            }
+        } else cout << "You cannot afford anymore. ☹️" << endl;
+
+    }
+
+    void increaseHighRarityOdds() {
+        cout << "\nPity system activated, odds increased!" << endl;
+
+        for (size_t i = 0; i < pool.getItems().size(); ++i) {
+            auto item = pool.getItems()[i];
+            if (item->getRarity() >= 4) pool.increaseRate(i, 50.0);
         }
     }
 };
