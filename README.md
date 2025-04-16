@@ -32,7 +32,7 @@ This C++ implementation features:
 ## Building and Running
 
 ### Requirements
-- C++17 compatible compiler (GCC, Clang, MSVC)
+- C++17 compatible compiler (GCC)
 - CMake (optional, for build configuration)
 
 ### Usage
