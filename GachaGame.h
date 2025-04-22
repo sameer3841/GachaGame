@@ -108,6 +108,7 @@ private:
             case 3: return 20;  // Rare
             case 4: return 50;  // Epic
             case 5: return 100; // Legendary
+            case 6: return 150; // Mythical
             default: return 0;
         }
     }
@@ -156,6 +157,9 @@ private:
         // Legendary Weapons
         pool.addItem(make_shared<GachaItem>("Legendary Blade", 5), 1.0);
         pool.addItem(make_shared<GachaItem>("Sword of Sparda", 5), 1.0);
+
+        //Mythical Weapon
+        pool.addItem(make_shared<GachaItem>("Master Sword", 6), 0.5);
     }
 
     void mainMenu() {
@@ -177,12 +181,16 @@ private:
                     break;
 
                 case 4: {
+                    while(true){
                     player.showInventory();
-                    cout << "\nSelect an item to sell (Choose by slot number): ";
+                    cout << "\nSelect item number to sell (0 to exit): ";
                     int itemNumber;
                     cin >> itemNumber;
+                    if(itemNumber == 0) break;
                     player.sellItem(itemNumber);
+                    }
                     break;
+
                 }
 
                 case 0:
