@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.30"
+						"string" : "3.16"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "GachaGame::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-GachaGame-Debug-21c870aa277925a7ed92.json",
+					"jsonFile" : "target-GachaGame-Debug-f71981c017efe2774d51.json",
 					"name" : "GachaGame",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/spatel211students.desu.edu/dev/dev-OOP/GachaGame/cmake-build-debug",
-		"source" : "/Users/spatel211students.desu.edu/dev/dev-OOP/GachaGame"
+		"build" : "/Users/spatel211students.desu.edu/dev/dev-OOP/testing/GachaGame/cmake-build-debug",
+		"source" : "/Users/spatel211students.desu.edu/dev/dev-OOP/testing/GachaGame"
 	},
 	"version" : 
 	{

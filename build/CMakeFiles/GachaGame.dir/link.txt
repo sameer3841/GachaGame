@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/GachaGame.dir/main.cpp.o -o GachaGame  /usr/local/Cellar/raylib/5.5/lib/libraylib.dylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -L/usr/local/Cellar/raylib/5.5/lib -lraylib
