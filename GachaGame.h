@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <random>
+#include <map>
 
 class GachaItem final {
 public:
@@ -44,15 +45,20 @@ public:
         return nullptr;
     }
 
-    std::vector<std::shared_ptr<GachaItem> > getItems() { return items; }
+    std::vector<std::shared_ptr<GachaItem>> getItems() { return items; }
 
     void increaseRate(size_t index, double increaseBy) {
         rates[index] += increaseBy;
         totalRate += increaseBy;
     }
 
+    void decreaseRate(size_t index, double decreaseBy) {
+        rates[index] -= decreaseBy;
+        totalRate -= decreaseBy;
+    }
+
 private:
-    std::vector<std::shared_ptr<GachaItem> > items;
+    std::vector<std::shared_ptr<GachaItem>> items;
     std::vector<double> rates;
     double totalRate;
     std::default_random_engine generator;
@@ -65,18 +71,18 @@ public:
     void addItem(const std::shared_ptr<GachaItem>& item) {
         inventory.push_back(item);
         std::cout << "\nObtained: " << item->getName()
-                  << " [" << item->getRarity() << "\u2605]" << std::endl;
+                  << " [" << item->getRarity() << "*]" << std::endl;
     }
 
     void showInventory() const {
         std::cout << "\n--- Inventory ---\n";
         for (size_t i = 0; i < inventory.size(); ++i) {
             std::cout << i + 1 << ". " << inventory[i]->getName()
-                      << " [" << inventory[i]->getRarity() << "\u2605]" << std::endl;
+                      << " [" << inventory[i]->getRarity() << "*]" << std::endl;
         }
     }
 
-    const std::vector<std::shared_ptr<GachaItem> >& getInventory() const {
+    const std::vector<std::shared_ptr<GachaItem>>& getInventory() const {
         return inventory;
     }
 
@@ -102,7 +108,7 @@ public:
 private:
     std::string name;
     int currency;
-    std::vector<std::shared_ptr<GachaItem> > inventory;
+    std::vector<std::shared_ptr<GachaItem>> inventory;
 
     static int getSellValue(int rarity) {
         switch (rarity) {
@@ -146,10 +152,10 @@ public:
                 }
                 case 2:
                     player.showInventory();
-                break;
+                    break;
                 case 3:
                     std::cout << "\nCurrency: " << player.getCurrency() << "\n";
-                break;
+                    break;
                 case 4: {
                     int itemNum;
                     do {
@@ -162,42 +168,63 @@ public:
                 }
                 case 0:
                     std::cout << "\nGoodbye!\n";
-                break;
+                    break;
                 default:
                     std::cout << "\nInvalid choice.\n";
-                break;
+                    break;
             }
         } while (choice != 0);
     }
 
     void setupPool() {
-        pool.addItem(std::make_shared<GachaItem>("Common Sword", 1), 60.0);
-        pool.addItem(std::make_shared<GachaItem>("Rusty Dagger", 1), 60.0);
-        pool.addItem(std::make_shared<GachaItem>("Wooden Ladle", 1), 60.0);
-        pool.addItem(std::make_shared<GachaItem>("Tree Branch", 1), 60.0);
-        pool.addItem(std::make_shared<GachaItem>("Small Rock", 1), 60.0);
-        pool.addItem(std::make_shared<GachaItem>("Wooden Club", 1), 60.0);
-        pool.addItem(std::make_shared<GachaItem>("Common Spear", 1), 60.0);
+        // Rarity totals
+        std::map<int, double> rarityProb;
+        rarityProb[1] = 80.0;
+        rarityProb[2] = 25.0;
+        rarityProb[3] = 15.0;
+        rarityProb[4] = 7.0;
+        rarityProb[5] = 1.9;
+        rarityProb[6] = 0.01;
 
-        pool.addItem(std::make_shared<GachaItem>("Torch", 2), 45.0);
-        pool.addItem(std::make_shared<GachaItem>("Kitchen Knife", 2), 45.0);
-        pool.addItem(std::make_shared<GachaItem>("Skeleton Arm", 2), 45.0);
-        pool.addItem(std::make_shared<GachaItem>("Reinforced Sword", 2), 45.0);
-        pool.addItem(std::make_shared<GachaItem>("Reinforced Spear", 2), 45.0);
+        // Items per rarity
+        std::map<int, std::vector<std::string> > items;
+        items[1].push_back("Common Sword");
+        items[1].push_back("Rusty Dagger");
+        items[1].push_back("Wooden Ladle");
+        items[1].push_back("Tree Branch");
+        items[1].push_back("Small Rock");
+        items[1].push_back("Wooden Club");
+        items[1].push_back("Common Spear");
 
-        pool.addItem(std::make_shared<GachaItem>("Rare Spear", 3), 30.0);
-        pool.addItem(std::make_shared<GachaItem>("Fire Sword", 3), 30.0);
-        pool.addItem(std::make_shared<GachaItem>("Ice Sword", 3), 30.0);
-        pool.addItem(std::make_shared<GachaItem>("Rare Claymore", 3), 30.0);
+        items[2].push_back("Torch");
+        items[2].push_back("Kitchen Knife");
+        items[2].push_back("Skeleton Arm");
+        items[2].push_back("Reinforced Sword");
+        items[2].push_back("Reinforced Spear");
 
-        pool.addItem(std::make_shared<GachaItem>("Epic Staff", 4), 9.0);
-        pool.addItem(std::make_shared<GachaItem>("Fire Claymore", 4), 9.0);
-        pool.addItem(std::make_shared<GachaItem>("Ice Claymore", 4), 9.0);
+        items[3].push_back("Rare Spear");
+        items[3].push_back("Fire Sword");
+        items[3].push_back("Ice Sword");
+        items[3].push_back("Rare Claymore");
 
-        pool.addItem(std::make_shared<GachaItem>("Legendary Blade", 5), 1.0);
-        pool.addItem(std::make_shared<GachaItem>("Sword of Sparda", 5), 1.0);
+        items[4].push_back("Epic Staff");
+        items[4].push_back("Fire Claymore");
+        items[4].push_back("Ice Claymore");
 
-        pool.addItem(std::make_shared<GachaItem>("Master Sword", 6), 0.05);
+        items[5].push_back("Legendary Blade");
+        items[5].push_back("Sword of Sparda");
+
+        items[6].push_back("Master Sword");
+
+        // Distribute rates
+        for (std::map<int, std::vector<std::string> >::iterator it = items.begin(); it != items.end(); ++it) {
+            int rarity = it->first;
+            std::vector<std::string>& names = it->second;
+            double ratePerItem = rarityProb[rarity] / names.size();
+            for (size_t i = 0; i < names.size(); ++i) {
+                pool.addItem(std::make_shared<GachaItem>(names[i], rarity), ratePerItem);
+            }
+        }
     }
 
     Player& getPlayer() { return player; }
@@ -214,13 +241,14 @@ public:
             player.addItem(item);
             player.spendCurrency(cost);
 
-            if (item->getRarity() >= 4) pityCounter = 0;
+            if (pityCounter >= 5) {
+                pityCounter = 0;
+                decreaseHighRarityOdds();
+            }
+            else if (item->getRarity() >= 3) pityCounter = 0;
             else pityCounter++;
 
-            if (pityCounter >= 5) {
-                increaseHighRarityOdds();
-                pityCounter = 0;
-            }
+            if (pityCounter >= 5) increaseHighRarityOdds();
 
             return item;
         }
@@ -237,7 +265,19 @@ private:
         std::cout << "\nPity system activated, odds increased!" << std::endl;
         for (size_t i = 0; i < pool.getItems().size(); ++i) {
             auto item = pool.getItems()[i];
-            if (item->getRarity() >= 4) pool.increaseRate(i, 50.0);
+            if (item->getRarity() == 4) pool.increaseRate(i, 50.0);
+            if (item->getRarity() == 5) pool.increaseRate(i, 20.0);
+            if (item->getRarity() == 6) pool.increaseRate(i, 10.0);
+        }
+    }
+
+    void decreaseHighRarityOdds() {
+        std::cout << "\nPity system deactivated!" << std::endl;
+        for (size_t i = 0; i < pool.getItems().size(); ++i) {
+            auto item = pool.getItems()[i];
+            if (item->getRarity() == 4) pool.decreaseRate(i, 50.0);
+            if (item->getRarity() == 5) pool.decreaseRate(i, 20.0);
+            if (item->getRarity() == 6) pool.decreaseRate(i, 10.0);
         }
     }
 };
