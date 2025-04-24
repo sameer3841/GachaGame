@@ -32,7 +32,7 @@ This C++ implementation features:
 ## Building and Running
 
 ### Requirements
-- C++17 compatible compiler (GCC)
+- C++11 compatible compiler (GCC)
 - CMake (optional, for build configuration)
 
 ### Usage
@@ -51,7 +51,11 @@ Developers can modify:
 ## Future Enhancements
 
 Potential improvements include:
-- Graphical interface using SFML or similar
 - Multiplayer trading systems
 - Event-based limited-time banners
 - Cloud save functionality
+
+## How to Run
+
+- Make sure you have `raylib` installed (`brew install raylib` recommended)
+- Open terminal and run `./build/GachaGame`
