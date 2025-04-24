@@ -2,6 +2,10 @@
 
 A C++ implementation of a gacha game system that simulates the mechanics found in popular gacha/loot box games. This project demonstrates probability-based rewards, currency management, and inventory systems using object-oriented programming principles.
 
+## Demonstration
+[![Watch Demo](https://img.shields.io/badge/Watch%20Demo-%F0%9F%8E%A5-blue?style=for-the-badge)](https://drive.google.com/file/d/1NnxEZKGdDiBMIBmIAnkcHNH1j2tCT44u/view?usp=drive_link)
+
+
 ## How Gacha Games Work
 
 Gacha games are a genre of games that feature random reward mechanics similar to loot boxes or trading card packs. Key elements include:
