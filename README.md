@@ -3,7 +3,7 @@
 A C++ implementation of a gacha game system that simulates the mechanics found in popular gacha/loot box games. This project demonstrates probability-based rewards, currency management, and inventory systems using object-oriented programming principles.
 
 ## Demonstration
-[![Watch Demo](https://img.shields.io/badge/Watch%20Demo-%F0%9F%8E%A5-blue?style=for-the-badge)](https://drive.google.com/file/d/1uBufZCb5UQJ9qQicRCwg-Kx-aP8a33QG/view?usp=sharing)
+[![Watch Demo](https://img.shields.io/badge/Watch%20Demo-%F0%9F%8E%A5-blue?style=for-the-badge)](https://drive.google.com/file/d/1DvCYzjW76vWijHl1x3YyQ1lDX_cx-DyU/view?usp=sharing)
 
 
 ## How Gacha Games Work
