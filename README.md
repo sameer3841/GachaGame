@@ -10,7 +10,7 @@ A C++ implementation of a gacha game system that simulates the mechanics found i
 
 Gacha games are a genre of games that feature random reward mechanics similar to loot boxes or trading card packs. Key elements include:
 
-- **Probability Distribution**: Items have different rarity tiers (Common, Rare, Epic, Legendary) with weighted drop chances
+- **Probability Distribution**: Items have different rarity tiers (Common, Uncommon, Rare, Epic, Legendary, Mythical) with weighted drop chances
 - **In-Game Currency**: Players use earned or purchased currency to make pulls
 - **Pity Systems**: Guaranteed high-rarity drops after certain numbers of attempts
 - **Collection Tracking**: Systems to manage and display obtained items
